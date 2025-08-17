@@ -2,10 +2,10 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
 import { cors } from "hono/cors";
-import routes from "./routes";
-import { connectToDatabase } from "./database";
-import { Signup } from "./models/Signup";
-import { processBrightdataLogic } from "./controller";
+import routes from "./routes.js";
+import { connectToDatabase } from "./database.js";
+import { Signup } from "./models/Signup.js";
+import { processBrightdataLogic } from "./controller.js";
 import { BrightDataResponse } from "./types/brightdata";
 import dotenv from "dotenv";
 import axios from "axios";
@@ -117,7 +117,7 @@ async function processSnapshotData(snapshotId: string) {
   }
 }
 
-const app = new Hono<{ Bindings: Env }>();
+const app = new Hono();
 app.use(logger());
 app.use(cors());
 
@@ -129,20 +129,32 @@ app.get("/", (c) => {
 app.route("/", routes);
 
 async function startServer() {
-  await connectToDatabase();
+  try {
+    console.log("🚀 Starting server...");
+    await connectToDatabase();
+    console.log("📊 Database connected successfully");
 
-  // Run startup service to check for incomplete snapshots
-  await checkAndProcessIncompleteSnapshots();
+    // Run startup service to check for incomplete snapshots
+    await checkAndProcessIncompleteSnapshots();
+    console.log("✅ Startup checks completed");
 
-  serve(
-    {
-      fetch: app.fetch,
-      port: 4000,
-    },
-    (info) => {
-      console.log(`Server is running on http://localhost:${info.port}`);
-    }
-  );
+    serve(
+      {
+        fetch: app.fetch,
+        port: 4000,
+      },
+      (info) => {
+        console.log(`🌟 Server is running on http://localhost:${info.port}`);
+        console.log("📍 Available routes:");
+        console.log("  GET  / - Health check");
+        console.log("  POST /signup - User signup");
+        console.log("  POST /brightdata/webhook - BrightData webhook");
+      }
+    );
+  } catch (error) {
+    console.error("❌ Server startup failed:", error);
+    process.exit(1);
+  }
 }
 
 startServer();

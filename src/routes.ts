@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { signup, processBrightdataResponse } from "./controller";
+import { signup, processBrightdataResponse } from "./controller.js";
 
 const routes = new Hono();
 

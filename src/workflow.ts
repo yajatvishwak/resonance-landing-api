@@ -1,5 +1,5 @@
-import { sendBrightDataRequest } from "./service/brightdata";
-import { BrightDataResponse } from "./types/brightdata";
+import { sendBrightDataRequest } from "./service/brightdata.js";
+import { BrightDataResponse } from "./types/brightdata.js";
 
 export const scrapeLinkedinProfile = async (linkedinUrl: string) => {
   return await sendBrightDataRequest(linkedinUrl);

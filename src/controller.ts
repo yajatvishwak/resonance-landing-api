@@ -1,10 +1,10 @@
 import type { Context } from "hono";
 import { z } from "zod";
-import { Signup } from "./models/Signup";
-import { analyzeLinkedinProfile, scrapeLinkedinProfile } from "./workflow";
-import { BrightDataResponse } from "./types/brightdata";
-import { sendEmail } from "./service/email";
-import { Personality } from "./models/Personality";
+import { Signup } from "./models/Signup.js";
+import { analyzeLinkedinProfile, scrapeLinkedinProfile } from "./workflow.js";
+import { BrightDataResponse } from "./types/brightdata.js";
+import { sendEmail } from "./service/email.js";
+import { Personality } from "./models/Personality.js";
 
 const SignupSchema = z.object({
   userEmail: z.email(),

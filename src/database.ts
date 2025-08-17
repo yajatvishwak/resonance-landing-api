@@ -10,7 +10,7 @@ export async function connectToDatabase(): Promise<boolean> {
     console.log("Successfully connected to MongoDB");
     return true;
   } catch (error) {
-    console.error("Failed to connect to MongoDB:", error);
+    console.log("Failed to connect to MongoDB:", error);
     return false;
   }
 }

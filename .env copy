@@ -2,3 +2,13 @@ BREVO_API_KEY=<BREVO_API_KEY>
 BRIGHTDATA_API_KEY=<BRIGHTDATA_API_KEY>
 MONGODB_URL=<MONGODB_URL>
 WEBHOOK_URL=<WEBHOOK_URL>
+
+# API Keys
+BREVO_API_KEY=your_actual_brevo_key
+BRIGHTDATA_API_KEY=your_actual_brightdata_key
+WEBHOOK_URL=your_actual_webhook_url
+
+# MongoDB Configuration
+MONGO_ROOT_USERNAME=your_custom_username
+MONGO_ROOT_PASSWORD=your_secure_password
+MONGO_DATABASE=your_database_name
